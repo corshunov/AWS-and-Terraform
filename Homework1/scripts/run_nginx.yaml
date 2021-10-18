@@ -1,0 +1,29 @@
+#cloud-config
+package_update: true
+package_upgrade: true
+packages:
+  - nginx
+write_files:
+  - path: /var/www/html/index.nginx-debian.html
+    content: |
+      <!DOCTYPE html>
+      <html>
+      <head>
+      <title>Welcome to Grandpa's Whiskey</title>
+      <style>
+        body {
+          width: 35em;
+          margin: 0 auto;
+          font-family: Tahoma, Verdana, Arial, sans-serif;
+        }
+      </style>
+      </head>
+      <body>
+      <h1>Welcome to Grandpa's Whiskey</h1>
+      </body>
+      </html>
+    owner: root:root
+    permissions: '0644'
+runcmd:
+  - service nginx enable
+  - service nginx start
