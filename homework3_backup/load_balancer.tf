@@ -1,15 +1,15 @@
 resource "aws_lb" "web_lb" {
-  name                        = "web_lb_${aws_vpc.vpc.id}"
+  name                        = "web-lb-${aws_vpc.vpc.id}"
   internal                    = false
   load_balancer_type          = "application"
   subnets                     = aws_subnet.public.*.id
-  security_groups             = [aws_security_group.sg_web.id]
+  security_groups             = [aws_security_group.web.id]
 }
 
 resource "aws_lb_listener" "web_lb_listener" {
   load_balancer_arn = aws_lb.web_lb.arn
   port               = 80
-  protocol           = "http"
+  protocol           = "HTTP"
 
   default_action {
     type             = "forward"
@@ -18,9 +18,9 @@ resource "aws_lb_listener" "web_lb_listener" {
 }
 
 resource "aws_lb_target_group" "web_target_group" {
-  name = "web_target_group"
+  name = "web"
   port = 80
-  protocol = "http"
+  protocol = "HTTP"
   vpc_id = aws_vpc.vpc.id
 
   health_check {

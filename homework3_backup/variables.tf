@@ -32,7 +32,7 @@ variable "private_cidrs" {
   default     = ["10.0.101.0/24", "10.0.102.0/24"]
 }
 
-variable "root_table_names" {
+variable "route_tables" {
   type    = list(string)
   default = ["public", "private_1", "private_2"]
 }

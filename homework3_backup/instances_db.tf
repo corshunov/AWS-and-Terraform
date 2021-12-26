@@ -1,14 +1,14 @@
 resource "aws_instance" "db" {
-  count                       = var.number_db_instances
-  ami                         = data.aws_ami.ubuntu.id
+  count                       = var.db_instance_count
+  ami                         = data.aws_ami.ubuntu_18.id
   instance_type               = var.db_instance_type
   key_name                    = var.key_name
   subnet_id                   = aws_subnet.private.*.id[count.index]
   associate_public_ip_address = false
-  vpc_security_group_ids      = [aws_security_group.sg_db.id]
+  vpc_security_group_ids      = [aws_security_group.db.id]
 
   tags = {
-    Name    = "db_server_${regex(".$", data.aws_availability_zones.available_azs.names[count.index])}"
+    Name    = "db_server_${count.index+1}"
   }
 }
 
@@ -23,7 +23,7 @@ resource "aws_security_group_rule" "db_ssh_ingress" {
   from_port   = 22
   to_port     = 22
   cidr_blocks = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.sg_db.id
+  security_group_id = aws_security_group.db.id
 }
 
 resource "aws_security_group_rule" "db_all_egress" {
@@ -32,5 +32,5 @@ resource "aws_security_group_rule" "db_all_egress" {
   from_port   = 0
   to_port     = 0
   cidr_blocks = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.sg_db.id
+  security_group_id = aws_security_group.db.id
 }
