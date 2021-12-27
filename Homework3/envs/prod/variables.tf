@@ -1,7 +1,7 @@
 ### General ###
 variable "env_tag" {
   type    = string
-  default = "Development"
+  default = "Production"
 }
 
 variable "owner_tag" {
@@ -73,7 +73,7 @@ variable "web_second_disk_device_name" {
 
 variable "web_access_log_bucket_name" {
   type    = string
-  default = "website-access-log-dev"
+  default = "website-access-log-prod"
 }
 
 ### DB servers ###

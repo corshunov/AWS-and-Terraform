@@ -2,6 +2,10 @@ variable "vpc_id" {
   type = string
 }
 
+variable "vpc_cidr" {
+  type = string
+}
+
 variable "ami_id" {
   type = string
 }
@@ -35,5 +39,9 @@ variable "second_disk_size" {
 }
 
 variable "second_disk_device_name" {
+  type = string
+}
+
+variable "access_log_bucket_name" {
   type = string
 }

@@ -1,8 +1,6 @@
-data "aws_availability_zones" "available" {}
-
 data "aws_ami" "ubuntu_18" {
   most_recent = true
-  owners      = [var.ubuntu_account_number]
+  owners      = ["099720109477"]
   
   filter {
     name   = "name"

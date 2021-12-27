@@ -7,6 +7,7 @@ resource "aws_instance" "web" {
   associate_public_ip_address = true
   vpc_security_group_ids      = [aws_security_group.web.id]
   user_data                   = local.user_data
+  iam_instance_profile        = aws_iam_instance_profile.web_instances.name
 
   root_block_device {
     encrypted   = false
